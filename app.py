@@ -119,11 +119,17 @@ USUARIOS = {
        "senha": "1234",
                 "nome": "Rotomoldagem1"
         },
+
     
     "roto.2": {
         "senha": "1234",
         "nome": "Rotomoldagem2"
             },
+    
+    "Marcio.d": {
+            "senha": "2304",
+            "nome": "Marcio Dultra"
+                },
 }
 
 
