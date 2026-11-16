@@ -6,10 +6,11 @@ import io
 
 from ocr import ler_imagem
 from parser import extrair_dados
-from database import salvar_dado, carregar_dados, limpar_banco, ARQUIVO
+from database import salvar_dado, carregar_dados, limpar_banco, excluir_registro
 from produtos import (
     carregar_produtos,
-    salvar_produto
+    salvar_produto,
+    excluir_produto
 )
 
 st.set_page_config(page_title="Sistema Fortlev", layout="wide")
@@ -103,7 +104,33 @@ USUARIOS = {
     "visitante": {
         "senha": "123456",
         "nome": "Visitante"
-    }
+    },
+    
+    "felipe.ss": {
+            "senha": "1234",
+            "nome": "Felipe Silva"
+    },
+    
+    "carla.am": {
+        "senha": "1234",
+        "nome": "Ana carla"
+            },
+    
+    "roto.1": {
+       "senha": "1234",
+                "nome": "Rotomoldagem1"
+        },
+
+    
+    "roto.2": {
+        "senha": "1234",
+        "nome": "Rotomoldagem2"
+            },
+    
+    "Marcio.d": {
+            "senha": "2304",
+            "nome": "Marcio Dultra"
+                },
 }
 
 
@@ -492,16 +519,7 @@ def tela_produtos():
             "Excluir Produto"
         ):
 
-            df = df[
-                df["codigo"].astype(str)
-                != produto
-            ]
-
-            df.to_csv(
-                "produtos.csv",
-                sep=";",
-                index=False
-            )
+            excluir_produto(produto)
 
             st.success(
                 " Produto excluído!"
@@ -1019,18 +1037,7 @@ def tela_inventario():
             "Excluir Registro"
         ):
 
-            df = df.drop(indice)
-
-            df.reset_index(
-                drop=True,
-                inplace=True
-            )
-
-            df.to_csv(
-                ARQUIVO,
-                index=False,
-                sep=";"
-            )
+            excluir_registro(df.iloc[int(indice)]["id"])
 
             st.success(
                 "Registro removido"
